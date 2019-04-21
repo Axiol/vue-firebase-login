@@ -7,7 +7,7 @@
           <div class="control has-icons-left">
             <input class="input is-medium" type="email" v-model="email" placeholder="john.doe@email.net">
             <span class="icon is-small is-left">
-              <font-awesome-icon icon="user" />
+              <font-awesome-icon icon="envelope" />
             </span>
           </div>
         </div>

@@ -1,11 +1,47 @@
 <template>
-  <div class="sign-up">
-    <p>Let's create a new account</p>
-    <input type="text" v-model="name" placeholder="Name"><br>
-    <input type="email" v-model="email" placeholder="Email"><br>
-    <input type="password" v-model="password" placeholder="Password"><br>
-    <button @click="signUp">Sign Up</button>
-    <span>or go back to <router-link to="login">login</router-link>.</span>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-4 is-offset-4">
+        <div class="field">
+          <label class="label is-medium">Name</label>
+          <div class="control has-icons-left">
+            <input class="input is-medium" type="text" v-model="name" placeholder="John">
+            <span class="icon is-small is-left">
+              <font-awesome-icon icon="user" />
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label is-medium">E-mail address</label>
+          <div class="control has-icons-left">
+            <input class="input is-medium" type="email" v-model="email" placeholder="john.doe@email.net">
+            <span class="icon is-small is-left">
+              <font-awesome-icon icon="envelope" />
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label is-medium">Password</label>
+          <div class="control has-icons-left">
+            <input class="input is-medium" type="password" v-model="password" placeholder="●●●●●●">
+            <span class="icon is-small is-left">
+              <font-awesome-icon icon="key" />
+            </span>
+          </div>
+        </div>
+
+        <div class="control">
+          <button class="button is-primary" @click="signUp">Sign Up</button>
+        </div>
+
+        <div class="content is-small">
+          <br>
+          <p>Or go back to <router-link to="login">login</router-link></p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
