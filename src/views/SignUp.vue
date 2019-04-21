@@ -1,6 +1,7 @@
 <template>
   <div class="sign-up">
     <p>Let's create a new account</p>
+    <input type="text" v-model="name" placeholder="Name"><br>
     <input type="email" v-model="email" placeholder="Email"><br>
     <input type="password" v-model="password" placeholder="Password"><br>
     <button @click="signUp">Sign Up</button>
@@ -15,6 +16,7 @@
     name: 'signUp',
     data() {
       return {
+        name: '',
         email: '',
         password: ''
       };
@@ -23,7 +25,14 @@
       signUp: function() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
           (user) => {
-            this.$router.replace('home');
+            const firestore = firebase.firestore();
+            const docPath = firestore.doc('/users/' + user.user.uid);
+
+            docPath.set({
+              name: this.name
+            }).then(() => {
+              this.$router.replace('home');
+            });
           },
           (err) => {
             alert('Oops. ' + err.message);
