@@ -3,6 +3,14 @@ import firebase from 'firebase'
 import App from './App.vue'
 import router from './router'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEnvelope, faUser, faKey } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faEnvelope, faUser, faKey)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 Vue.config.productionTip = false;
 
 let app = '';
