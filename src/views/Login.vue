@@ -1,10 +1,37 @@
 <template>
-  <div class="login">
-    <h3>Sign in</h3>
-    <input type="email" v-model="email" placeholder="Email"><br>
-    <input type="password" v-model="password" placeholder="Password"><br>
-    <button @click="login">Connection</button>
-    <p>You don't have an account? You can <router-link to="/sign-up">create one</router-link></p>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-4 is-offset-4">
+        <div class="field">
+          <label class="label is-medium">E-mail address</label>
+          <div class="control has-icons-left">
+            <input class="input is-medium" type="email" v-model="email" placeholder="john.doe@email.net">
+            <span class="icon is-small is-left">
+              <font-awesome-icon icon="user" />
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label is-medium">Password</label>
+          <div class="control has-icons-left">
+            <input class="input is-medium" type="password" v-model="password" placeholder="●●●●●●">
+            <span class="icon is-small is-left">
+              <font-awesome-icon icon="key" />
+            </span>
+          </div>
+        </div>
+
+        <div class="control">
+          <button class="button is-primary" @click="login">Connection</button>
+        </div>
+
+        <div class="content is-small">
+          <br>
+          <p>You don't have an account? You can <router-link to="/sign-up">create one</router-link></p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
