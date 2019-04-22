@@ -19,6 +19,12 @@
           <div class="control">
             <button class="button is-primary" v-bind:class="{ 'is-loading': isLoading }" @click="updateInfo">Update</button>
           </div>
+
+          <transition name="fade">
+            <div v-show="succesAlert" class="notification is-primary">
+              The update is a success
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -39,7 +45,8 @@
       return {
         userInfo: '',
         name: '',
-        isLoading: false
+        isLoading: false,
+        succesAlert: false,
       };
     },
     methods: {
@@ -52,8 +59,9 @@
         docPath.set({
           name: this.name
         }).then(() => {
-          alert('Update done');
           this.isLoading = false;
+          this.succesAlert = true;
+          setTimeout(() => { this.succesAlert = false; }, 3000);
         });
       }
     },
@@ -71,3 +79,16 @@
     }
   }
 </script>
+
+<style scoped>
+  .control {
+    margin-bottom: 0.75rem;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .4s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+</style>
