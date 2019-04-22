@@ -17,7 +17,7 @@
           </div>
 
           <div class="control">
-            <button class="button is-primary" @click="updateInfo">Update</button>
+            <button class="button is-primary" v-bind:class="{ 'is-loading': isLoading }" @click="updateInfo">Update</button>
           </div>
         </div>
       </div>
@@ -38,11 +38,14 @@
     data() {
       return {
         userInfo: '',
-        name: ''
+        name: '',
+        isLoading: false
       };
     },
     methods: {
       updateInfo: function() {
+        this.isLoading = true;
+
         const firestore = firebase.firestore();
         const docPath = firestore.doc('/users/' + firebase.auth().currentUser.uid);
 
@@ -50,6 +53,7 @@
           name: this.name
         }).then(() => {
           alert('Update done');
+          this.isLoading = false;
         });
       }
     },
