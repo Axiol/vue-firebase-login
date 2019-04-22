@@ -4,7 +4,6 @@ import firebase from 'firebase'
 
 import Home from './views/Home'
 import Login from './views/Login'
-import SignUp from './views/SignUp'
 
 Vue.use(Router)
 
@@ -31,12 +30,18 @@ const router = new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        formType: 'LoginForm'
+      }
     },
     {
       path: '/sign-up',
       name: 'SignUp',
-      component: SignUp
+      component: Login,
+      meta: {
+        formType: 'SignUpForm'
+      }
     }
   ]
 });
