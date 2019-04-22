@@ -1,36 +1,16 @@
 <template>
-  <div class="home">
-    {{ userInfo.name }}
-    <button @click="logout">Logout</button>
+  <div>
+    <navbar></navbar>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase'
+  import Navbar from '@/components/layout/Navbar'
 
-export default {
-  name: 'home',
-  data() {
-    return {
-      userInfo: '',
-    };
-  },
-  methods: {
-    logout: function() {
-      firebase.auth().signOut().then(() => {
-        this.$router.replace('login');
-      });
+  export default {
+    name: 'home',
+    components: {
+      Navbar
     }
-  },
-  created: function() {
-    const firestore = firebase.firestore();
-    const docPath = firestore.doc('/users/' + firebase.auth().currentUser.uid);
-
-    docPath.get().then((doc) => {
-      if (doc && doc.exists) {
-        this.userInfo = doc.data();
-      }
-    });
   }
-}
 </script>
