@@ -20,7 +20,7 @@
           <a class="navbar-link">Hello {{ userInfo.name }}</a>
 
           <div class="navbar-dropdown is-right">
-            <a class="navbar-item">My profile</a>
+            <router-link to="/profile" class="navbar-item">My profile</router-link>
             <hr class="navbar-divider">
             <a @click="logout" class="navbar-item">Logout</a>
           </div>
@@ -61,8 +61,12 @@
 </script>
 
 <style scoped>
-  .logo {
-    max-height: 28px;
-    margin: 0.75rem 0.5rem 0 0.5rem;
+  .navbar {
+    margin-bottom: 4rem;
   }
+
+    .logo {
+      max-height: 28px;
+      margin: 0.75rem 0.5rem 0 0.5rem;
+    }
 </style>
