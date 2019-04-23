@@ -1,4 +1,4 @@
-# where2sit
+# vue-firebase-login
 
 ## Project setup
 ```
