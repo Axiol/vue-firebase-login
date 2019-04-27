@@ -56,7 +56,7 @@
         const firestore = firebase.firestore();
         const docPath = firestore.doc('/users/' + firebase.auth().currentUser.uid);
 
-        docPath.set({
+        docPath.update({
           name: this.name
         }).then(() => {
           this.isLoading = false;
