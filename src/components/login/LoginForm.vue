@@ -47,7 +47,7 @@
     methods: {
       login: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-          (user) => {
+          () => {
             this.$router.replace('home');
           },
           (err) => {
