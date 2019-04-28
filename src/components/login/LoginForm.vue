@@ -34,7 +34,8 @@
 </template>
 
 <script>
-  import firebase from 'firebase';
+  import firebase from 'firebase'
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'loginForm',
@@ -45,10 +46,13 @@
       };
     },
     methods: {
+      ...mapActions(['setUser']),
       login: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-          () => {
-            this.$router.replace('home');
+          (user) => {
+            this.setUser(user.user.uid).then(() => {
+              this.$router.replace('home');
+            });
           },
           (err) => {
             alert('Oops. ' + err.message);

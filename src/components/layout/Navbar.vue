@@ -32,30 +32,29 @@
 
 <script>
   import firebase from 'firebase'
+  import { mapState, mapActions } from 'vuex'
 
   export default {
     name: 'navbar',
-    data() {
-      return {
-        userInfo: '',
-      };
-    },
     methods: {
+      ...mapActions(['setUser']),
       logout: function() {
         firebase.auth().signOut().then(() => {
           this.$router.replace('login');
         });
       }
     },
+    computed: {
+      ...mapState([
+        'userInfo'
+      ])
+    },
     created: function() {
-      const firestore = firebase.firestore();
-      const docPath = firestore.doc('/users/' + firebase.auth().currentUser.uid);
-
-      docPath.get().then((doc) => {
-        if (doc && doc.exists) {
-          this.userInfo = doc.data();
-        }
-      });
+      if(typeof userInfo == 'undefined') {
+        this.setUser(firebase.auth().currentUser.uid).then(() => {
+          return;
+        });
+      }
     }
   }
 </script>

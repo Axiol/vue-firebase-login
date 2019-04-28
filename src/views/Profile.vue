@@ -33,6 +33,7 @@
 
 <script>
   import firebase from 'firebase'
+  import { mapState, mapActions } from 'vuex'
 
   import Navbar from '@/components/layout/Navbar'
 
@@ -43,39 +44,43 @@
     },
     data() {
       return {
-        userInfo: '',
         name: '',
         isLoading: false,
         succesAlert: false,
       };
     },
     methods: {
+      ...mapActions(['setUser', 'updateUser']),
       updateInfo: function() {
         this.isLoading = true;
 
-        const firestore = firebase.firestore();
-        const docPath = firestore.doc('/users/' + firebase.auth().currentUser.uid);
-
-        docPath.update({
+        const user = {
           name: this.name
-        }).then(() => {
+        }
+
+        const payload = {
+          id: firebase.auth().currentUser.uid,
+          user: user
+        };
+
+        this.updateUser(payload).then(() => {
           this.isLoading = false;
           this.succesAlert = true;
           setTimeout(() => { this.succesAlert = false; }, 3000);
         });
       }
     },
+    computed: {
+      ...mapState(['userInfo'])
+    },
     created: function() {
-      const firestore = firebase.firestore();
-      const docPath = firestore.doc('/users/' + firebase.auth().currentUser.uid);
-
-      docPath.get().then((doc) => {
-        if (doc && doc.exists) {
-          this.userInfo = doc.data();
-
+      if(typeof userInfo == 'undefined') {
+        this.setUser(firebase.auth().currentUser.uid).then(() => {
           this.name = this.userInfo.name;
-        }
-      });
+        });
+      } else {
+        this.name = this.userInfo.name;
+      }
     }
   }
 </script>
